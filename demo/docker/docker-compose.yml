@@ -1,0 +1,53 @@
+version: "3"
+
+  apisix:
+    image: apache/apisix:2.15.0-alpine
+    restart: always
+    volumes:
+      - ./apisix_log:/usr/local/apisix/logs
+      - ./apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro
+    depends_on:
+      - etcd
+    ##network_mode: host
+    ports:
+      - "9080:9080/tcp"
+      - "9091:9091/tcp"
+      - "9443:9443/tcp"
+      - "9092:9092/tcp"
+    networks:
+      apisix:
+
+  etcd:
+    image: bitnami/etcd:3.4.15
+    restart: always
+    volumes:
+      - etcd_data:/bitnami/etcd
+    environment:
+      ETCD_ENABLE_V2: "true"
+      ALLOW_NONE_AUTHENTICATION: "yes"
+      ETCD_ADVERTISE_CLIENT_URLS: "http://0.0.0.0:2379"
+      ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2379"
+    ports:
+      - "2379:2379/tcp"
+    networks:
+      apisix:
+
+  nacos:
+    image: nacos/nacos-server:v2.1.1
+    container_name: nacos-standalone
+    environment:
+    - PREFER_HOST_MODE=hostname
+    - MODE=standalone
+    ports:
+    - "8848:8848"
+    - "9848:9848"
+    networks:
+      apisix:
+
+networks:
+  apisix:
+    driver: bridge
+
+volumes:
+  etcd_data:
+    driver: local
