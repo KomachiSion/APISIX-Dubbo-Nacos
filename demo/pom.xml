@@ -31,10 +31,10 @@
     <properties>
         <source.level>1.8</source.level>
         <target.level>1.8</target.level>
-        <dubbo.version>2.7.15</dubbo.version>
+        <dubbo.version>3.1.2</dubbo.version>
 <!--        <dubbo.version>3.0.0</dubbo.version>-->
         <spring.version>5.2.8.RELEASE</spring.version>
-        <springboot.version>2.1.17.RELEASE</springboot.version>
+        <springboot.version>3.0.0</springboot.version>
         <junit.version>4.12</junit.version>
         <docker-maven-plugin.version>0.30.0</docker-maven-plugin.version>
         <jib-maven-plugin.version>1.2.0</jib-maven-plugin.version>
@@ -42,7 +42,7 @@
         <maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
         <image.name>${project.artifactId}:${dubbo.version}</image.name>
         <java-image.name>openjdk:8</java-image.name>
-        <nacos.version>2.1.1</nacos.version>
+        <nacos.version>2.2.0</nacos.version>
         <dubbo.port>20880</dubbo.port>
         <nacos.port>8848</nacos.port>
         <main-class>org.apache.dubbo.samples.provider.ProviderBootstrap</main-class>
@@ -89,7 +89,7 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.9.1</version>
+            <version>2.13.2</version>
         </dependency>
     
         <dependency>
